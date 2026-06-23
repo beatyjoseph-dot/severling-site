@@ -218,6 +218,27 @@
     .view-panel.is-active {
       display: block;
     }
+    /* MOBILE RESPONSIVE FIXES */
+@media (max-width: 768px) {
+    /* Forces the layout to stack vertically instead of pushing right */
+    body, .container, main, section {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 15px !important;
+        box-sizing: border-box !important;
+        float: none !important;
+    }
+
+    /* Prevents the image from bursting out of the screen bounds */
+    .about-image-container, img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        margin: 10px auto !important;
+    }
+}
   </style>
 </head>
 <body>
