@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SEVERLING</title>
+  <style>
+    /* Indestructible Core Layout Defaults */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      padding: 60px 40px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      width: 100%;
+      max-width: 1400px; 
+      margin: 0 auto;
+      display: flex; 
+    }
+    
+    /* LEFT SIDEBAR NAVIGATION BLOCK */
+    .left {
+      width: 350px;
+      min-width: 350px; 
+      padding-right: 50px;
+    }
+    
+    /* SYSTEM LOGO TYPOGRAPHY STYLE */
+    .logo-container {
+      margin-bottom: 15px;
+    }
+    h1.logo-scramble {
+      font-weight: 300;
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    
+    .left-desc {
+      color: #888888;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ABOUT ROUTER NAVIGATION LINK */
+    .about-link-row {
+      margin-top: 40px;
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+    .about-link-row a {
+      color: #ffffff;
+      text-decoration: none;
+      transition: opacity 0.1s ease;
+    }
+    .about-link-row a:hover {
+      opacity: 0.7;
+    }
+
+    /* ENHANCED SOCIAL MATRIX CONTRAST */
+    .social-links-row {
+      margin-top: 15px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #888888;
+      letter-spacing: 0.5px;
+    }
+    .social-links-row a {
+      color: #888888;
+      text-decoration: none;
+      transition: color 0.1s ease;
+    }
+    .social-links-row a:hover {
+      color: #ffffff;
+    }
+    
+    /* MECHANICAL INDEX ARCHIVE BUTTON */
+    .menu-btn {
+      color: #ffffff;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      padding: 15px 0;
+      margin-top: 12px; 
+      font-size: 11px;
+      font-family: monospace;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+    }
+    .archive-drawer {
+      display: none;
+      padding: 20px 0;
+    }
+    .archive-drawer.is-open {
+      display: block;
+    }
+    .archive-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .archive-list a {
+      color: #666666;
+      font-family: monospace;
+      font-size: 12px;
+      text-decoration: none;
+    }
+    .archive-list a:hover {
+      color: #ffffff;
+    }
+
+    /* RIGHT PRIMARY CHRONO VIEW PORT */
+    .right {
+      flex: 1;
+      padding-left: 40px;
+      border-left: 1px solid #1a1a1a;
+      min-width: 0; 
+    }
+    .feed-header {
+      font-size: 11px; 
+      font-family: monospace;
+      color: #555555; 
+      border-bottom: 1px solid #1a1a1a; 
+      padding-bottom: 20px; 
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .post-title {
+      font-weight: 300;         
+      font-size: 20px;          
+      letter-spacing: 1.5px;    
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    
+    .post-date {
+      font-family: monospace;
+      font-size: 13px;
+      color: #555555;
+    }
+    .content-text {
+      color: #a0a0a0;
+      font-size: 15px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+    .content-text a {
+      color: #ffffff;
+      text-decoration: none;
+      border-bottom: 1px dotted #555555;
+      transition: border-color 0.1s ease;
+    }
+    .content-text a:hover {
+      border-bottom-color: #ffffff;
+    }
+    
+    /* LOCKED SLIM PLAYER CONTAINER */
+    .media-container {
+      max-width: 700px;
+      width: 100%;
+      background: #111111;
+      border: 1px solid #1a1a1a;
+      overflow: hidden;
+      line-height: 0; 
+    }
+    .media-container iframe {
+      width: 100%;
+      height: 120px; 
+      border: 0;
+    }
+
+    /* INTEGRATED PROFILE IMAGE FRAMING (STANDBY HIDDEN STATE) */
+    .about-image-container {
+      display: none; /* Change 'none' to 'block' once you upload me.jpg to GitHub */
+      max-width: 400px;
+      width: 100%;
+      border: 1px solid #1a1a1a;
+      background: #111111;
+      margin-bottom: 30px;
+      line-height: 0;
+    }
+    .about-image-container img {
+      width: 100%;
+      height: auto;
+      opacity: 0.85;
+      filter: grayscale(100%);
+      transition: opacity 0.2s ease, filter 0.2s ease;
+    }
+    .about-image-container img:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+
+    /* VIEWPORT STATE PANELS */
+    .view-panel {
+      display: none;
+    }
+    .view-panel.is-active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- LEFT SIDEBAR -->
+    <div class="left">
+      <div class="logo-container">
+        <h1 class="logo-scramble" id="logoText" data-default="S E V E R ── L I N G" data-target="S3V3RLING" onclick="showView('transmission')">S E V E R ── L I N G</h1>
+      </div>
+      <p class="left-desc">Continuous audio logs, raw sound textures, and minimalist visual documentation layouts.</p>
+      
+      <!-- ABOUT ROUTER NAVIGATION LINK -->
+      <div class="about-link-row">
+        <a href="#" onclick="showView('about'); return false;">// ABOUT</a>
+      </div>
+
+      <!-- MINIMAL SOCIAL LAYER BLOCK -->
+      <div class="social-links-row">
+        // ANTISOCIALS - 
+        <a href="https://www.instagram.com/severlingmusic/" target="_blank">IG</a> - 
+        <a href="https://www.facebook.com/SeverlingMusic" target="_blank">FB</a> - 
+        <a href="https://www.youtube.com/@SeverlingMusic" target="_blank">YT</a> - 
+        <a href="https://severling.bandcamp.com/" target="_blank">BC</a>
+      </div>
+
+      <div class="menu-btn" onclick="toggleArchiveMenu()">
+        <span>// DIRECT INDEX ARCHIVE</span>
+        <span id="arrowIcon">▼</span>
+      </div>
+      
+      <div class="archive-drawer" id="drawerTarget">
+        <ul class="archive-list">
+          <li><a href="#" onclick="showView('transmission'); return false;">2026.06.23 — LORE ── REMIX</a></li>
+          <li><a href="#" onclick="return false;">2026.04.12 — STATIC ── CONE</a></li>
+          <li><a href="#" onclick="return false;">2025.11.02 — ZERO ── PULSE</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- RIGHT FEED DISPLAY -->
+    <div class="right">
+      
+      <!-- VIEWSTATE 1: CURRENT TRANSMISSION FEED -->
+      <div id="viewTransmission" class="view-panel is-active">
+        <div class="feed-header">CURRENT TRANSMISSION</div>
+        
+        <div class="post-header">
+          <h2 class="post-title scramble" id="titleText" data-value="LORE ── REMIX">LORE ── REMIX</h2>
+          <span class="post-date">2026.06.23</span>
+        </div>
+        
+        <p class="content-text">
+          Official remix re-work for Joseph Beaty's "Lore". Re-engineered frequencies, spatial textures, and structural deconstructions under the SEVERLING framework.
+        </p>
+        
+        <div class="media-container">
+          <iframe src="https://bandcamp.com/EmbeddedPlayer/url=https%3A%2F%2Fjosephbeaty.bandcamp.com%2Ftrack%2Flore-severling-remix/size=large/bgcol=0a0a0a/linkcol=ffffff/artwork=small/transparent=true/" seamless><a href="https://josephbeaty.bandcamp.com/track/lore-severling-remix">Lore (Severling Remix) by Joseph Beaty</a></iframe>
+        </div>
+      </div>
+
+      <!-- VIEWSTATE 2: ABOUT DOCUMENTATION PANEL -->
+      <div id="viewAbout" class="view-panel">
+        <div class="feed-header">DOCUMENTATION // BACKGROUND</div>
+        
+        <div class="post-header">
+          <h2 class="post-title scramble" id="aboutTitleText" data-value="OVERVIEW ── FRAMEWORK">OVERVIEW ── FRAMEWORK</h2>
+          <span class="post-date">INFO</span>
+        </div>
+
+        <!-- ABOUT IMAGE PLACEHOLDER (SAFELY IN STANDBY MODE) -->
+        <div class="about-image-container">
+          <img src="me.jpg" alt="Joseph Beaty">
+        </div>
+        
+        <p class="content-text">
+          Severling is a dark electronic audio-visual project by musician <a href="https://josephbeaty.com" target="_blank">Joseph Beaty</a>, combining glitch-driven music, ambient layers, experimental sound design, and visual corruption art. Blending fractured rhythms, degraded textures, and immersive atmospheres, the project explores themes of memory, decay, dreams, and digital erosion through both sound and image.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function showView(viewName) {
+      document.getElementById('viewTransmission').classList.remove('is-active');
+      document.getElementById('viewAbout').classList.remove('is-active');
+      
+      if(viewName === 'about') {
+        document.getElementById('viewAbout').classList.add('is-active');
+        triggerScramble(document.getElementById('aboutTitleText'));
+      } else {
+        document.getElementById('viewTransmission').classList.add('is-active');
+        triggerScramble(document.getElementById('titleText'));
+      }
+    }
+
+    function toggleArchiveMenu() {
+      const drawer = document.getElementById('drawerTarget');
+      const arrow = document.getElementById('arrowIcon');
+      if (drawer.classList.contains('is-open')) {
+        drawer.classList.remove('is-open');
+        arrow.innerText = "▼";
+      } else {
+        drawer.classList.add('is-open');
+        arrow.innerText = "▲";
+      }
+    }
+
+    const glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_#──";
+
+    const logoEl = document.getElementById('logoText');
+    let logoInterval = null;
+
+    logoEl.addEventListener('mouseenter', () => {
+      let iteration = 0;
+      const targetStr = logoEl.dataset.target;
+      clearInterval(logoInterval);
+
+      logoInterval = setInterval(() => {
+        logoEl.innerText = targetStr.split("").map((letter, index) => {
+          if (index < iteration) return targetStr[index];
+          return glyphs[Math.floor(Math.random() * glyphs.length)];
+        }).join("");
+
+        if (iteration >= targetStr.length) clearInterval(logoInterval);
+        iteration += 1 / 2;
+      }, 30);
+    });
+
+    logoEl.addEventListener('mouseleave', () => {
+      let iteration = 0;
+      const defaultStr = logoEl.dataset.default;
+      clearInterval(logoInterval);
+
+      logoInterval = setInterval(() => {
+        logoEl.innerText = defaultStr.split("").map((letter, index) => {
+          if (index < iteration) return defaultStr[index];
+          return glyphs[Math.floor(Math.random() * glyphs.length)];
+        }).join("");
+
+        if (iteration >= defaultStr.length) clearInterval(logoInterval);
+        iteration += 1 / 2;
+      }, 20);
+    });
+
+    const titleEl = document.getElementById('titleText');
+    
+    function triggerScramble(element) {
+      if (!element) return;
+      let iteration = 0;
+      clearInterval(element.scrambleInterval);
+      
+      element.scrambleInterval = setInterval(() => {
+        element.innerText = element.innerText.split("").map((letter, index) => {
+          if(index < iteration) return element.dataset.value[index];
+          return glyphs[Math.floor(Math.random() * glyphs.length)];
+        }).join("");
+        
+        if(iteration >= element.dataset.value.length) clearInterval(element.scrambleInterval);
+        iteration += 1 / 3;
+      }, 25);
+    }
+
+    titleEl.addEventListener('mouseenter', () => triggerScramble(titleEl));
+    
+    const aboutTitleEl = document.getElementById('aboutTitleText');
+    if (aboutTitleEl) {
+      aboutTitleEl.addEventListener('mouseenter', () => triggerScramble(aboutTitleEl));
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => triggerScramble(titleEl), 200);
+    });
+  </script>
+
+</body>
+</html>
