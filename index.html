@@ -218,6 +218,14 @@
     .view-panel.is-active {
       display: block;
     }
+    /* DESKTOP FLOW FIX */
+.social-links-row {
+    display: block !important;
+    clear: both !important;       /* Forces it to drop below any floated elements */
+    width: 100% !important;       /* Makes it take up its own full line */
+    margin-top: 20px !important;  /* Creates a clean gap below the archive */
+    margin-bottom: 20px !important;
+}
 /* ABSOLUTE MOBILE OVERRIDE */
 @media (max-width: 768px) {
     /* Hide the elements completely that are stretching the layout sideways */
