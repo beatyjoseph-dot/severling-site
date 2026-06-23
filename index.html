@@ -218,25 +218,54 @@
     .view-panel.is-active {
       display: block;
     }
-    /* MOBILE RESPONSIVE FIXES */
+/* ALL-IN-ONE MOBILE RESPONSIVE FIX */
 @media (max-width: 768px) {
-    /* Forces the layout to stack vertically instead of pushing right */
-    body, .container, main, section {
-        display: block !important;
+    /* 1. Unfreeze the master layout wrapper */
+    body, .wrapper, .main-layout, main {
+        display: flex !important;
+        flex-direction: column !important; /* Stack menu on top, content below */
         width: 100% !important;
         max-width: 100% !important;
-        margin: 0 auto !important;
-        padding: 15px !important;
+        margin: 0 !important;
+        padding: 10px !important;
         box-sizing: border-box !important;
-        float: none !important;
     }
 
-    /* Prevents the image from bursting out of the screen bounds */
+    /* 2. Fix the navigation/sidebar container */
+    nav, .sidebar, .menu-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin-bottom: 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 3. Fix the content/about sections */
+    section, .content, #about {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        display: block !important;
+    }
+
+    /* 4. Force text to wrap inside the screen boundaries */
+    p, h1, h2, h3, li, span {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        max-width: 100% !important;
+    }
+
+    /* 5. Force the profile image to scale natively */
     .about-image-container, img {
+        display: block !important;
         max-width: 100% !important;
         height: auto !important;
-        display: block !important;
-        margin: 10px auto !important;
+        margin: 15px auto !important;
     }
 }
   </style>
