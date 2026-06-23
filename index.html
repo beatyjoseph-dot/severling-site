@@ -218,13 +218,7 @@
     .view-panel.is-active {
       display: block;
     }
-    /* DESKTOP FLOW FIX */
-.social-links-row {
-    display: block !important;
-    clear: both !important;       /* Forces it to drop below any floated elements */
-    width: 100% !important;       /* Makes it take up its own full line */
-    margin-top: 20px !important;  /* Creates a clean gap below the archive */
-    margin-bottom: 20px !important;
+   
 }
 /* ABSOLUTE MOBILE OVERRIDE */
 @media (max-width: 768px) {
@@ -309,7 +303,7 @@
     </div>
 
      <!-- MINIMAL SOCIAL LAYER BLOCK -->
-      <div class="social-links-row">
+      <div class="social-links-row" style="display: block; clear: left; margin-top: 35px; width: 100%;">
         // ANTISOCIALS - 
         <a href="https://www.instagram.com/severlingmusic/" target="_blank">IG</a> - 
         <a href="https://www.facebook.com/SeverlingMusic" target="_blank">FB</a> - 
