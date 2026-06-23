@@ -267,6 +267,22 @@
         height: auto !important;
         margin: 15px auto !important;
     }
+
+    /* 6. Fix for the scrolling/scramble header causing sideways stretch */
+    .post-header {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 10px 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    .post-title {
+        font-size: 1.5rem !important; /* Shrinks text size so it fits on a phone */
+        white-space: normal !important; /* Allows title to wrap instead of stretching wide */
+        word-wrap: break-word !important;
+        letter-spacing: normal !important;
+    }
 }
   </style>
 </head>
