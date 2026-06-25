@@ -225,6 +225,9 @@
     .mobile-nav-toggle {
       display: none;
     }
+    .mobile-nav-drawer {
+      display: contents;
+    }
 
     @media (max-width: 768px) {
         body {
@@ -252,21 +255,28 @@
             border: 1px solid #1a1a1a;
         }
 
-        /* The Menu Drawer Cloak State */
+        /* Layout modifications for mobile container stability */
         .left {
+            width: 100%;
+            min-width: 100%;
+            padding-right: 0;
+            margin-bottom: 40px;
+        }
+
+        /* Hide ONLY the navigation utilities into the full-page cloak box */
+        .mobile-nav-drawer {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            min-width: 100%;
             background-color: #0a0a0a;
             z-index: 1000;
             padding: 90px 20px 40px 20px;
             overflow-y: auto;
         }
-        .left.is-open {
+        .mobile-nav-drawer.is-open {
             display: block;
         }
 
@@ -296,50 +306,46 @@
 </head>
 <body>
 
-  <!-- MOBILE INTERFACES MENU BUTTON TRIGGER -->
   <div class="mobile-nav-toggle" id="mobileToggle" onclick="toggleMobileMenu()">// MENU</div>
 
   <div class="container">
     
-    <!-- LEFT SIDEBAR -->
     <div class="left" id="sidebarMenu">
       <div class="logo-container">
         <h1 class="logo-scramble" id="logoText" data-default="S E V E R ── L I N G" data-target="S3V3RLING" onclick="showView('transmission')">S E V E R ── L I N G</h1>
       </div>
       <p class="left-desc">Captured moments of sound and visual disturbance. Cutting the ties that bind.</p>
       
-      <!-- ABOUT ROUTER NAVIGATION LINK -->
-      <div class="about-link-row">
-        <a href="#" onclick="showView('about'); return false;">// ABOUT</a>
-      </div>
+      <div class="mobile-nav-drawer" id="drawerCloak">
+        <div class="about-link-row">
+          <a href="#" onclick="showView('about'); return false;">// ABOUT</a>
+        </div>
 
-      <div class="menu-btn" onclick="toggleArchiveMenu()">
-        <span>// DIRECT INDEX ARCHIVE</span>
-        <span id="arrowIcon">▼</span>
-      </div>
-      
-      <div class="archive-drawer" id="drawerTarget">
-        <ul class="archive-list">
-          <li><a href="#" onclick="showView('transmission'); return false;">2026.06.23 — LORE ── REMIX</a></li>
-          <li><a href="#" onclick="return false;">2026.04.12 — STATIC ── CONE</a></li>
-          <li><a href="#" onclick="return false;">2025.11.02 — ZERO ── PULSE</a></li>
-        </ul>
-      </div>
+        <div class="menu-btn" onclick="toggleArchiveMenu()">
+          <span>// DIRECT INDEX ARCHIVE</span>
+          <span id="arrowIcon">▼</span>
+        </div>
+        
+        <div class="archive-drawer" id="drawerTarget">
+          <ul class="archive-list">
+            <li><a href="#" onclick="showView('transmission'); return false;">2026.06.23 — LORE ── REMIX</a></li>
+            <li><a href="#" onclick="return false;">2026.04.12 — STATIC ── CONE</a></li>
+            <li><a href="#" onclick="return false;">2025.11.02 — ZERO ── PULSE</a></li>
+          </ul>
+        </div>
 
-      <!-- SOCIAL LAYER BLOCK -->
-      <div class="social-links-row">
-        // ANTISOCIALS - 
-        <a href="https://www.instagram.com/severlingmusic/" target="_blank">IG</a> - 
-        <a href="https://www.facebook.com/SeverlingMusic" target="_blank">FB</a> - 
-        <a href="https://www.youtube.com/@SeverlingMusic" target="_blank">YT</a> - 
-        <a href="https://severling.bandcamp.com/" target="_blank">BC</a>
+        <div class="social-links-row">
+          // ANTISOCIALS - 
+          <a href="https://www.instagram.com/severlingmusic/" target="_blank">IG</a> - 
+          <a href="https://www.facebook.com/SeverlingMusic" target="_blank">FB</a> - 
+          <a href="https://www.youtube.com/@SeverlingMusic" target="_blank">YT</a> - 
+          <a href="https://severling.bandcamp.com/" target="_blank">BC</a>
+        </div>
       </div>
     </div>
 
-    <!-- RIGHT FEED DISPLAY -->
     <div class="right">
       
-      <!-- VIEWSTATE 1: CURRENT TRANSMISSION FEED -->
       <div id="viewTransmission" class="view-panel is-active">
         <div class="feed-header">CURRENT TRANSMISSION</div>
         
@@ -357,7 +363,6 @@
         </div>
       </div>
 
-      <!-- VIEWSTATE 2: ABOUT DOCUMENTATION PANEL -->
       <div id="viewAbout" class="view-panel">
         <div class="feed-header">DOCUMENTATION // BACKGROUND</div>
         
@@ -366,7 +371,6 @@
           <span class="post-date">INFO</span>
         </div>
 
-        <!-- ABOUT IMAGE PLACEHOLDER -->
         <div class="about-image-container">
           <img src="me.jpg" alt="Joseph Beaty">
         </div>
@@ -394,20 +398,20 @@
       }
 
       /* Auto-retract mobile menu interface layers when navigating */
-      const sidebar = document.getElementById('sidebarMenu');
+      const drawerCloak = document.getElementById('drawerCloak');
       const toggleBtn = document.getElementById('mobileToggle');
-      if(sidebar) sidebar.classList.remove('is-open');
+      if(drawerCloak) drawerCloak.classList.remove('is-open');
       if(toggleBtn) toggleBtn.innerText = "// MENU";
     }
 
     function toggleMobileMenu() {
-      const sidebar = document.getElementById('sidebarMenu');
+      const drawerCloak = document.getElementById('drawerCloak');
       const toggleBtn = document.getElementById('mobileToggle');
-      if (sidebar.classList.contains('is-open')) {
-        sidebar.classList.remove('is-open');
+      if (drawerCloak.classList.contains('is-open')) {
+        drawerCloak.classList.remove('is-open');
         toggleBtn.innerText = "// MENU";
       } else {
-        sidebar.classList.add('is-open');
+        drawerCloak.classList.add('is-open');
         toggleBtn.innerText = "// CLOSE";
       }
     }
