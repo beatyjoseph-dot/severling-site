@@ -306,22 +306,17 @@
 </head>
 <body>
 
-  <!-- MOBILE INTERFACES MENU BUTTON TRIGGER -->
   <div class="mobile-nav-toggle" id="mobileToggle" onclick="toggleMobileMenu()">// MENU</div>
 
   <div class="container">
     
-    <!-- LEFT SIDEBAR -->
     <div class="left" id="sidebarMenu">
-      <!-- ALWAYS VISIBLE TITLE CORE -->
       <div class="logo-container">
         <h1 class="logo-scramble" id="logoText" data-default="S E V E R ── L I N G" data-target="S3V3RLING" onclick="showView('transmission')">S E V E R ── L I N G</h1>
       </div>
       <p class="left-desc">Captured moments of sound and visual disturbance. Cutting the ties that bind.</p>
       
-      <!-- WRAPPER TARGET TO BE CLOAKED SECURELY ON MOBILE -->
       <div class="mobile-nav-drawer" id="drawerCloak">
-        <!-- ABOUT ROUTER NAVIGATION LINK -->
         <div class="about-link-row">
           <a href="#" onclick="showView('about'); return false;">// ABOUT</a>
         </div>
@@ -332,13 +327,11 @@
         </div>
         
         <div class="archive-drawer" id="drawerTarget">
-          <!-- Dynamic archive tree targets this list block -->
           <ul class="archive-list" id="dynamicArchiveList">
             <li><a href="#" style="color: #444;">SYSTEM INDEXING...</a></li>
           </ul>
         </div>
 
-        <!-- SOCIAL LAYER BLOCK -->
         <div class="social-links-row">
           // ANTISOCIALS - 
           <a href="https://www.instagram.com/severlingmusic/" target="_blank">IG</a> - 
@@ -349,18 +342,14 @@
       </div>
     </div>
 
-    <!-- RIGHT FEED DISPLAY -->
     <div class="right">
       
-      <!-- VIEWSTATE 1: CURRENT TRANSMISSION FEED -->
       <div id="viewTransmission" class="view-panel is-active">
         <div class="feed-header" id="transmissionFeedHeader">CURRENT TRANSMISSION</div>
         
-        <!-- AUTOMATED INJECTION ANCHOR HUB -->
         <div id="liveBloggerFeed">SYSTEM STANDBY // RECOVERING STREAM HOOK...</div>
       </div>
 
-      <!-- VIEWSTATE 2: ABOUT DOCUMENTATION PANEL -->
       <div id="viewAbout" class="view-panel">
         <div class="feed-header">DOCUMENTATION // BACKGROUND</div>
         
@@ -369,7 +358,6 @@
           <span class="post-date">INFO</span>
         </div>
 
-        <!-- ABOUT IMAGE PLACEHOLDER -->
         <div class="about-image-container" style="display: block; max-width: 400px; width: 100%; border: 1px solid #1a1a1a; background: #111111; margin-bottom: 30px; line-height: 0;">
           <img src="me.jpg" alt="Joseph Beaty" style="width: 100%; height: auto; opacity: 0.85; filter: grayscale(100%); transition: opacity 0.2s ease, filter 0.2s ease;" onmouseenter="this.style.opacity='1'; this.style.filter='grayscale(0%)'" onmouseleave="this.style.opacity='0.85'; this.style.filter='grayscale(100%)'">
         </div>
@@ -393,7 +381,11 @@
       if (!feedTarget) return;
 
       try {
-        const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(bloggerFeedUrl)}`;
+        // Appending unique timestamp token clears old cached versions from converter servers instantly
+        const cacheBuster = new Date().getTime();
+        const freshFeedUrl = `${bloggerFeedUrl}?t=${cacheBuster}`;
+        const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(freshFeedUrl)}`;
+        
         const response = await fetch(proxyUrl);
         const data = await response.json();
 
@@ -409,180 +401,3 @@
 
         // Render the #1 absolute newest post to the current transmission viewing pane
         renderTargetPost(0);
-
-        // Map and rebuild archive drawer listing tree using remaining array assets
-        if (archiveTarget) {
-          archiveTarget.innerHTML = '';
-          
-          // Add default top route to return to the newest transmission
-          const homeLi = document.createElement('li');
-          homeLi.innerHTML = `<a href="#" onclick="showView('transmission'); renderTargetPost(0); return false;">[ CURRENT LOG FEED ]</a>`;
-          archiveTarget.appendChild(homeLi);
-
-          cachedPostsArray.forEach((item, index) => {
-            let formattedDate = "0000.00.00";
-            if (item.pubDate) {
-              formattedDate = item.pubDate.split(' ')[0].replace(/-/g, '.');
-            }
-
-            const archiveLi = document.createElement('li');
-            archiveLi.innerHTML = `<a href="#" onclick="showView('transmission'); renderTargetPost(${index}); return false;">${formattedDate} — ${item.title.toUpperCase()}</a>`;
-            archiveTarget.appendChild(archiveLi);
-          });
-        }
-
-      } catch (err) {
-        console.error(err);
-        feedTarget.innerHTML = '<p class="content-text" style="color: #555555;">CRITICAL ERROR // DATA PIPELINE OFFLINE</p>';
-      }
-    }
-
-    function renderTargetPost(index) {
-      const feedTarget = document.getElementById('liveBloggerFeed');
-      const headerLabel = document.getElementById('transmissionFeedHeader');
-      if (!feedTarget || cachedPostsArray.length === 0) return;
-
-      const item = cachedPostsArray[index];
-      
-      // Dynamic Header labels flag whether view reads current index trace or older system file
-      if (index === 0) {
-        headerLabel.innerText = "CURRENT TRANSMISSION";
-      } else {
-        headerLabel.innerText = `ARCHIVED TRANSMISSION // RECORD_INDEX_0${index}`;
-      }
-
-      let formattedDate = "TRANSMISSION";
-      if(item.pubDate) {
-        formattedDate = item.pubDate.split(' ')[0].replace(/-/g, '.');
-      }
-
-      feedTarget.innerHTML = `
-        <div class="transmission-post">
-          <div class="post-header">
-            <h2 class="post-title scramble" id="blogTitle-${index}" data-value="${item.title.toUpperCase()}">${item.title.toUpperCase()}</h2>
-            <span class="post-date">${formattedDate}</span>
-          </div>
-          <div class="blogger-content-wrapper">
-            ${item.content || item.description}
-          </div>
-        </div>
-      `;
-
-      // Instantly apply signature text-scramble hover animations over target components
-      const currentTitle = document.getElementById(`blogTitle-${index}`);
-      if (currentTitle) {
-        currentTitle.addEventListener('mouseenter', () => triggerScramble(currentTitle));
-        setTimeout(() => triggerScramble(currentTitle), 100);
-      }
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function showView(viewName) {
-      document.getElementById('viewTransmission').classList.remove('is-active');
-      document.getElementById('viewAbout').classList.remove('is-active');
-      
-      if(viewName === 'about') {
-        document.getElementById('viewAbout').classList.add('is-active');
-        triggerScramble(document.getElementById('aboutTitleText'));
-      } else {
-        document.getElementById('viewTransmission').classList.add('is-active');
-      }
-
-      /* Auto-retract mobile menu interface layers when navigating */
-      const drawerCloak = document.getElementById('drawerCloak');
-      const toggleBtn = document.getElementById('mobileToggle');
-      if(drawerCloak) drawerCloak.classList.remove('is-open');
-      if(toggleBtn) toggleBtn.innerText = "// MENU";
-    }
-
-    function toggleMobileMenu() {
-      const drawerCloak = document.getElementById('drawerCloak');
-      const toggleBtn = document.getElementById('mobileToggle');
-      if (drawerCloak.classList.contains('is-open')) {
-        drawerCloak.classList.remove('is-open');
-        toggleBtn.innerText = "// MENU";
-      } else {
-        drawerCloak.classList.add('is-open');
-        toggleBtn.innerText = "// CLOSE";
-      }
-    }
-
-    function toggleArchiveMenu() {
-      const drawer = document.getElementById('drawerTarget');
-      const arrow = document.getElementById('arrowIcon');
-      if (drawer.classList.contains('is-open')) {
-        drawer.classList.remove('is-open');
-        arrow.innerText = "▼";
-      } else {
-        drawer.classList.add('is-open');
-        arrow.innerText = "▲";
-      }
-    }
-
-    const glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_#──";
-
-    const logoEl = document.getElementById('logoText');
-    let logoInterval = null;
-
-    logoEl.addEventListener('mouseenter', () => {
-      let iteration = 0;
-      const targetStr = logoEl.dataset.target;
-      clearInterval(logoInterval);
-
-      logoInterval = setInterval(() => {
-        logoEl.innerText = targetStr.split("").map((letter, index) => {
-          if (index < iteration) return targetStr[index];
-          return glyphs[Math.floor(Math.random() * glyphs.length)];
-        }).join("");
-
-        if (iteration >= targetStr.length) clearInterval(logoInterval);
-        iteration += 1 / 2;
-      }, 30);
-    });
-
-    logoEl.addEventListener('mouseleave', () => {
-      let iteration = 0;
-      const defaultStr = logoEl.dataset.default;
-      clearInterval(logoInterval);
-
-      logoInterval = setInterval(() => {
-        logoEl.innerText = defaultStr.split("").map((letter, index) => {
-          if (index < iteration) return defaultStr[index];
-          return glyphs[Math.floor(Math.random() * glyphs.length)];
-        }).join("");
-
-        if (iteration >= defaultStr.length) clearInterval(logoInterval);
-        iteration += 1 / 2;
-      }, 20);
-    });
-    
-    function triggerScramble(element) {
-      if (!element) return;
-      let iteration = 0;
-      clearInterval(element.scrambleInterval);
-      
-      element.scrambleInterval = setInterval(() => {
-        element.innerText = element.innerText.split("").map((letter, index) => {
-          if(index < iteration) return element.dataset.value[index];
-          return glyphs[Math.floor(Math.random() * glyphs.length)];
-        }).join("");
-        
-        if(iteration >= element.dataset.value.length) clearInterval(element.scrambleInterval);
-        iteration += 1 / 3;
-      }, 25);
-    }
-    
-    const aboutTitleEl = document.getElementById('aboutTitleText');
-    if (aboutTitleEl) {
-      aboutTitleEl.addEventListener('mouseenter', () => triggerScramble(aboutTitleEl));
-    }
-
-    // Initialize data feeds upon site entry safely
-    window.addEventListener('load', () => {
-      loadBloggerFeed();
-    });
-  </script>
-
-</body>
-</html>
