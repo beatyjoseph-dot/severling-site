@@ -139,9 +139,6 @@
       margin-bottom: 40px;
       letter-spacing: 1px;
     }
-    .transmission-post {
-      margin-bottom: 60px;
-    }
     .post-header {
       display: flex;
       justify-content: space-between;
@@ -167,7 +164,7 @@
       font-size: 15px;
       line-height: 1.75;
       font-weight: 300;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
     .content-text a {
       color: #ffffff;
@@ -187,16 +184,11 @@
       border: 1px solid #1a1a1a;
       overflow: hidden;
       line-height: 0; 
-      margin-bottom: 30px;
     }
     .media-container iframe {
       width: 100%;
       height: 120px; 
       border: 0;
-    }
-    /* Video container adjustment for 16:9 widescreen layers */
-    .media-container.video-aspect iframe {
-      height: 390px;
     }
 
     /* INTEGRATED PROFILE IMAGE FRAMING (STANDBY HIDDEN STATE) */
@@ -209,57 +201,9 @@
       margin-bottom: 30px;
       line-height: 0;
     }
-    .about-image-container.post-image {
-      max-width: 700px; /* Stretch timeline entry imagery wider */
-    }
     .about-image-container img {
       width: 100%;
       height: auto;
       opacity: 0.85;
       filter: grayscale(100%);
-      transition: opacity 0.2s ease, filter 0.2s ease;
-    }
-    .about-image-container img:hover {
-      opacity: 1;
-      filter: grayscale(0%);
-    }
-
-    /* VIEWPORT STATE PANELS */
-    .view-panel {
-      display: none;
-    }
-    .view-panel.is-active {
-      display: block;
-    }
-   
-    /* DYNAMIC ISOLATED MOBILE SYSTEM */
-    .mobile-nav-toggle {
-      display: none;
-    }
-    .mobile-nav-drawer {
-      display: contents;
-    }
-
-    @media (max-width: 768px) {
-        body {
-            padding: 30px 20px;
-        }
-        .container {
-            display: block;
-            position: relative;
-        }
-
-        /* Fixed Minimal Trigger Token */
-        .mobile-nav-toggle {
-            display: block;
-            position: fixed;
-            top: 30px;
-            right: 20px;
-            font-family: monospace;
-            font-size: 12px;
-            letter-spacing: 1px;
-            color: #ffffff;
-            background: #0a0a0a;
-            padding: 4px 8px;
-            cursor: pointer;
-            z
+      transition: opacity 0.2s ease, filter
