@@ -307,17 +307,22 @@
 </head>
 <body>
 
+  <!-- MOBILE INTERFACES MENU BUTTON TRIGGER -->
   <div class="mobile-nav-toggle" id="mobileToggle" onclick="toggleMobileMenu()">// MENU</div>
 
   <div class="container">
     
+    <!-- LEFT SIDEBAR -->
     <div class="left" id="sidebarMenu">
+      <!-- ALWAYS VISIBLE TITLE CORE -->
       <div class="logo-container">
         <h1 class="logo-scramble" id="logoText" data-default="S E V E R ── L I N G" data-target="S3V3RLING" onclick="showView('transmission')">S E V E R ── L I N G</h1>
       </div>
       <p class="left-desc">Captured moments of sound and visual disturbance. Cutting the ties that bind.</p>
       
+      <!-- WRAPPER TARGET TO BE CLOAKED SECURELY ON MOBILE -->
       <div class="mobile-nav-drawer" id="drawerCloak">
+        <!-- ABOUT ROUTER NAVIGATION LINK -->
         <div class="about-link-row">
           <a href="#" onclick="showView('about'); return false;">// ABOUT</a>
         </div>
@@ -330,11 +335,10 @@
         <div class="archive-drawer" id="drawerTarget">
           <ul class="archive-list">
             <li><a href="#" onclick="showView('transmission'); return false;">CURRENT LOG FEED</a></li>
-            <li><a href="#" onclick="return false;">2026.04.12 — STATIC ── CONE</a></li>
-            <li><a href="#" onclick="return false;">2025.11.02 — ZERO ── PULSE</a></li>
           </ul>
         </div>
 
+        <!-- SOCIAL LAYER BLOCK -->
         <div class="social-links-row">
           // ANTISOCIALS - 
           <a href="https://www.instagram.com/severlingmusic/" target="_blank">IG</a> - 
@@ -345,14 +349,18 @@
       </div>
     </div>
 
+    <!-- RIGHT FEED DISPLAY -->
     <div class="right">
       
+      <!-- VIEWSTATE 1: CURRENT TRANSMISSION FEED -->
       <div id="viewTransmission" class="view-panel is-active">
         <div class="feed-header">CURRENT TRANSMISSION</div>
         
-        <div id="liveBloggerFeed">SYSTEM STANBY // RECOVERING STREAM HOOK...</div>
+        <!-- AUTOMATED INJECTION ANCHOR HUB -->
+        <div id="liveBloggerFeed">SYSTEM STANDBY // RECOVERING STREAM HOOK...</div>
       </div>
 
+      <!-- VIEWSTATE 2: ABOUT DOCUMENTATION PANEL -->
       <div id="viewAbout" class="view-panel">
         <div class="feed-header">DOCUMENTATION // BACKGROUND</div>
         
@@ -361,6 +369,7 @@
           <span class="post-date">INFO</span>
         </div>
 
+        <!-- ABOUT IMAGE PLACEHOLDER -->
         <div class="about-image-container" style="display: block; max-width: 400px; width: 100%; border: 1px solid #1a1a1a; background: #111111; margin-bottom: 30px; line-height: 0;">
           <img src="me.jpg" alt="Joseph Beaty" style="width: 100%; height: auto; opacity: 0.85; filter: grayscale(100%); transition: opacity 0.2s ease, filter 0.2s ease;" onmouseenter="this.style.opacity='1'; this.style.filter='grayscale(0%)'" onmouseleave="this.style.opacity='0.85'; this.style.filter='grayscale(100%)'">
         </div>
