@@ -166,7 +166,7 @@
       color: #555555;
     }
     
-    /* Content injection container formatting */
+    /* Content Injection Wrapper Formatting */
     .blogger-content-wrapper {
       color: #a0a0a0;
       font-size: 15px;
@@ -309,22 +309,17 @@
 </head>
 <body>
 
-  <!-- MOBILE INTERFACES MENU BUTTON TRIGGER -->
   <div class="mobile-nav-toggle" id="mobileToggle" onclick="toggleMobileMenu()">// MENU</div>
 
   <div class="container">
     
-    <!-- LEFT SIDEBAR -->
     <div class="left" id="sidebarMenu">
-      <!-- ALWAYS VISIBLE TITLE CORE -->
       <div class="logo-container">
         <h1 class="logo-scramble" id="logoText" data-default="S E V E R ── L I N G" data-target="S3V3RLING" onclick="showView('transmission')">S E V E R ── L I N G</h1>
       </div>
       <p class="left-desc">Captured moments of sound and visual disturbance. Cutting the ties that bind.</p>
       
-      <!-- WRAPPER TARGET TO BE CLOAKED SECURELY ON MOBILE -->
       <div class="mobile-nav-drawer" id="drawerCloak">
-        <!-- ABOUT ROUTER NAVIGATION LINK -->
         <div class="about-link-row">
           <a href="#" onclick="showView('about'); return false;">// ABOUT</a>
         </div>
@@ -335,13 +330,11 @@
         </div>
         
         <div class="archive-drawer" id="drawerTarget">
-          <!-- Dynamic archive tree targets this list block -->
           <ul class="archive-list" id="dynamicArchiveList">
             <li><a href="#" style="color: #444;">SYSTEM INDEXING...</a></li>
           </ul>
         </div>
 
-        <!-- SOCIAL LAYER BLOCK -->
         <div class="social-links-row">
           // ANTISOCIALS - 
           <a href="https://www.instagram.com/severlingmusic/" target="_blank">IG</a> - 
@@ -352,18 +345,14 @@
       </div>
     </div>
 
-    <!-- RIGHT FEED DISPLAY -->
     <div class="right">
       
-      <!-- VIEWSTATE 1: CURRENT TRANSMISSION FEED -->
       <div id="viewTransmission" class="view-panel is-active">
         <div class="feed-header" id="transmissionFeedHeader">CURRENT TRANSMISSION</div>
         
-        <!-- AUTOMATED INJECTION ANCHOR HUB -->
-        <div id="liveBloggerFeed">SYSTEM STANDBY // LOADING LOCAL TRANSMISSION MATRIX...</div>
+        <div id="liveBloggerFeed">SYSTEM STANDBY // LOCAL LOG INITIALIZATION...</div>
       </div>
 
-      <!-- VIEWSTATE 2: ABOUT DOCUMENTATION PANEL -->
       <div id="viewAbout" class="view-panel">
         <div class="feed-header">DOCUMENTATION // BACKGROUND</div>
         
@@ -372,7 +361,6 @@
           <span class="post-date">INFO</span>
         </div>
 
-        <!-- ABOUT IMAGE PLACEHOLDER -->
         <div class="about-image-container" style="display: block; max-width: 400px; width: 100%; border: 1px solid #1a1a1a; background: #111111; margin-bottom: 30px; line-height: 0;">
           <img src="me.jpg" alt="Joseph Beaty" style="width: 100%; height: auto; opacity: 0.85; filter: grayscale(100%); transition: opacity 0.2s ease, filter 0.2s ease;" onmouseenter="this.style.opacity='1'; this.style.filter='grayscale(0%)'" onmouseleave="this.style.opacity='0.85'; this.style.filter='grayscale(100%)'">
         </div>
@@ -387,23 +375,27 @@
   </div>
 
   <script>
-    // =========================================================
-    // LOCALIZED ARCHIVE ENGINE DATABASE
-    // Add your newest post object block right at the top.
-    // =========================================================
+    // =========================================================================
+    // LOCALIZED DATABASE ENGINE (Manage your static site posts manually here!)
+    // Keep your absolute newest post entry at the very top of the list array.
+    // =========================================================================
     const SEVERLING_POSTS = [
       {
-        title: "PROJECT UPDATE // INTERNALLY LOCKED PROTOCOLS",
+        title: "MANUAL SOURCE FEED // REPOSITORY STABILITY VERIFICATION",
         date: "2026.06.26",
         content: `
-          <p>System structural framework has been decentralized entirely. The external blogger pipeline has been deleted from the architecture core. Everything serves directly from localized storage keys.</p>
+          <p>The core external architecture feed has been completely decoupled. This transmission is compiled directly from the localized script database structure.</p>
+          
+          <img src="assets/images/me.jpg" alt="Local Transmission Image Component">
+          
+          <p>To post a fresh record log, simply replicate this object formatting block and drop it directly onto the top of the dataset array.</p>
         `
       },
       {
-        title: "HISTORICAL TRANSCRIPTION // SYSTEM RECORDING 01",
-        date: "2026.04.12",
+        title: "PROJECT CORE Restructuring // SYSTEM RECONCILE",
+        date: "2026.06.25",
         content: `
-          <p>This is a foundational archived post format structure. Plain text reads natively inside HTML tags cleanly.</p>
+          <p>Initial data logging offline testing. The system layout is confirmed fully optimized across desktop and variable mobile viewports.</p>
         `
       }
     ];
@@ -418,10 +410,10 @@
         return;
       }
 
-      // Automatically render absolute newest entry
+      // Render the absolute newest log file initially
       renderTargetPost(0);
 
-      // Build out archive sidebar drawer paths natively
+      // Map and write layout entries for the Direct Index Archive Sidebar
       if (archiveTarget) {
         archiveTarget.innerHTML = '';
         
@@ -463,7 +455,7 @@
         </div>
       `;
 
-      // Spark execution of typography scramble animation
+      // Instantly trigger typography scramble animations over header component keys
       const currentTitle = document.getElementById(`blogTitle-${index}`);
       if (currentTitle) {
         currentTitle.addEventListener('mouseenter', () => triggerScramble(currentTitle));
@@ -572,7 +564,7 @@
       aboutTitleEl.addEventListener('mouseenter', () => triggerScramble(aboutTitleEl));
     }
 
-    // Initialize localized data feed cleanly on entry
+    // Fire engine architecture components on client load
     window.addEventListener('load', () => {
       buildInternalEngine();
     });
