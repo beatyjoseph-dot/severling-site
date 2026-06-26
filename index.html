@@ -166,12 +166,15 @@
       color: #555555;
     }
     
-    /* Blogger content injection container */
+    /* Content injection container formatting */
     .blogger-content-wrapper {
       color: #a0a0a0;
       font-size: 15px;
       line-height: 1.75;
       font-weight: 300;
+    }
+    .blogger-content-wrapper p {
+      margin-bottom: 20px;
     }
     .blogger-content-wrapper img {
       display: block;
@@ -357,7 +360,7 @@
         <div class="feed-header" id="transmissionFeedHeader">CURRENT TRANSMISSION</div>
         
         <!-- AUTOMATED INJECTION ANCHOR HUB -->
-        <div id="liveBloggerFeed">SYSTEM STANDBY // RECOVERING STREAM HOOK...</div>
+        <div id="liveBloggerFeed">SYSTEM STANDBY // LOADING LOCAL TRANSMISSION MATRIX...</div>
       </div>
 
       <!-- VIEWSTATE 2: ABOUT DOCUMENTATION PANEL -->
@@ -384,91 +387,83 @@
   </div>
 
   <script>
-    const bloggerFeedUrl = "https://severling.blogspot.com/feeds/posts/default";
-    let cachedPostsArray = []; // Store raw post content object map securely globally
+    // =========================================================
+    // LOCALIZED ARCHIVE ENGINE DATABASE
+    // Add your newest post object block right at the top.
+    // =========================================================
+    const SEVERLING_POSTS = [
+      {
+        title: "PROJECT UPDATE // INTERNALLY LOCKED PROTOCOLS",
+        date: "2026.06.26",
+        content: `
+          <p>System structural framework has been decentralized entirely. The external blogger pipeline has been deleted from the architecture core. Everything serves directly from localized storage keys.</p>
+        `
+      },
+      {
+        title: "HISTORICAL TRANSCRIPTION // SYSTEM RECORDING 01",
+        date: "2026.04.12",
+        content: `
+          <p>This is a foundational archived post format structure. Plain text reads natively inside HTML tags cleanly.</p>
+        `
+      }
+    ];
 
-    async function loadBloggerFeed() {
+    function buildInternalEngine() {
       const feedTarget = document.getElementById('liveBloggerFeed');
       const archiveTarget = document.getElementById('dynamicArchiveList');
       if (!feedTarget) return;
 
-      try {
-        const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(bloggerFeedUrl)}`;
-        const response = await fetch(proxyUrl);
-        const data = await response.json();
+      if (!SEVERLING_POSTS || SEVERLING_POSTS.length === 0) {
+        feedTarget.innerHTML = '<p class="content-text" style="color: #555555;">NO CURRENT ACTIVE TRANSMISSIONS</p>';
+        return;
+      }
 
-        if (data.status !== 'ok') throw new Error("Stream connection failed");
+      // Automatically render absolute newest entry
+      renderTargetPost(0);
 
-        cachedPostsArray = data.items; // Store raw post feed details locally
-        feedTarget.innerHTML = ''; 
+      // Build out archive sidebar drawer paths natively
+      if (archiveTarget) {
+        archiveTarget.innerHTML = '';
+        
+        const homeLi = document.createElement('li');
+        homeLi.innerHTML = `<a href="#" onclick="showView('transmission'); renderTargetPost(0); return false;">[ CURRENT LOG FEED ]</a>`;
+        archiveTarget.appendChild(homeLi);
 
-        if (cachedPostsArray.length === 0) {
-          feedTarget.innerHTML = '<p class="content-text" style="color: #555555;">NO CURRENT ACTIVE TRANSMISSIONS</p>';
-          return;
-        }
-
-        // Render the #1 absolute newest post to the current transmission viewing pane
-        renderTargetPost(0);
-
-        // Map and rebuild archive drawer listing tree using remaining array assets
-        if (archiveTarget) {
-          archiveTarget.innerHTML = '';
-          
-          // Add default top route to return to the newest transmission
-          const homeLi = document.createElement('li');
-          homeLi.innerHTML = `<a href="#" onclick="showView('transmission'); renderTargetPost(0); return false;">[ CURRENT LOG FEED ]</a>`;
-          archiveTarget.appendChild(homeLi);
-
-          cachedPostsArray.forEach((item, index) => {
-            let formattedDate = "0000.00.00";
-            if (item.pubDate) {
-              formattedDate = item.pubDate.split(' ')[0].replace(/-/g, '.');
-            }
-
-            const archiveLi = document.createElement('li');
-            archiveLi.innerHTML = `<a href="#" onclick="showView('transmission'); renderTargetPost(${index}); return false;">${formattedDate} — ${item.title.toUpperCase()}</a>`;
-            archiveTarget.appendChild(archiveLi);
-          });
-        }
-
-      } catch (err) {
-        console.error(err);
-        feedTarget.innerHTML = '<p class="content-text" style="color: #555555;">CRITICAL ERROR // DATA PIPELINE OFFLINE</p>';
+        SEVERLING_POSTS.forEach((item, index) => {
+          const archiveLi = document.createElement('li');
+          archiveLi.innerHTML = `<a href="#" onclick="showView('transmission'); renderTargetPost(${index}); return false;">${item.date} — ${item.title.toUpperCase()}</a>`;
+          archiveTarget.appendChild(archiveLi);
+        });
       }
     }
 
     function renderTargetPost(index) {
       const feedTarget = document.getElementById('liveBloggerFeed');
       const headerLabel = document.getElementById('transmissionFeedHeader');
-      if (!feedTarget || cachedPostsArray.length === 0) return;
+      if (!feedTarget || !SEVERLING_POSTS || SEVERLING_POSTS.length === 0) return;
 
-      const item = cachedPostsArray[index];
+      const item = SEVERLING_POSTS[index];
+      if (!item) return;
       
-      // Dynamic Header labels flag whether view reads current index trace or older system file
       if (index === 0) {
         headerLabel.innerText = "CURRENT TRANSMISSION";
       } else {
         headerLabel.innerText = `ARCHIVED TRANSMISSION // RECORD_INDEX_0${index}`;
       }
 
-      let formattedDate = "TRANSMISSION";
-      if(item.pubDate) {
-        formattedDate = item.pubDate.split(' ')[0].replace(/-/g, '.');
-      }
-
       feedTarget.innerHTML = `
         <div class="transmission-post">
           <div class="post-header">
             <h2 class="post-title scramble" id="blogTitle-${index}" data-value="${item.title.toUpperCase()}">${item.title.toUpperCase()}</h2>
-            <span class="post-date">${formattedDate}</span>
+            <span class="post-date">${item.date}</span>
           </div>
           <div class="blogger-content-wrapper">
-            ${item.content || item.description}
+            ${item.content}
           </div>
         </div>
       `;
 
-      // Instantly apply signature text-scramble hover animations over target components
+      // Spark execution of typography scramble animation
       const currentTitle = document.getElementById(`blogTitle-${index}`);
       if (currentTitle) {
         currentTitle.addEventListener('mouseenter', () => triggerScramble(currentTitle));
@@ -489,7 +484,6 @@
         document.getElementById('viewTransmission').classList.add('is-active');
       }
 
-      /* Auto-retract mobile menu interface layers when navigating */
       const drawerCloak = document.getElementById('drawerCloak');
       const toggleBtn = document.getElementById('mobileToggle');
       if(drawerCloak) drawerCloak.classList.remove('is-open');
@@ -578,9 +572,9 @@
       aboutTitleEl.addEventListener('mouseenter', () => triggerScramble(aboutTitleEl));
     }
 
-    // Initialize data feeds upon site entry safely
+    // Initialize localized data feed cleanly on entry
     window.addEventListener('load', () => {
-      loadBloggerFeed();
+      buildInternalEngine();
     });
   </script>
 
